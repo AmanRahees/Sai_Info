@@ -10,4 +10,5 @@ urlpatterns = [
     path('add-task', AddTask, name="add-task"),
     path('edit-task/<int:id>', EditTask, name="edit-task"),
     path('delete-task/<int:id>', DeleteTask, name="delete-task"),
+    path('complete-task/<int:id>', TaskComplete, name="complete-task"),
 ]

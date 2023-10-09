@@ -16,7 +16,8 @@
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'main' %}">Todo App</a>
-          <div>
+          <div class="d-flex gap-3">
+            <p class="text-light my-auto text-capitalize">Username: {{request.user}}</p>
             <button type="button" data-bs-toggle="modal" data-bs-target="#LogoutModal" class="btn btn-outline-danger btn-sm">Logout</button>
           </div>
         </div>
@@ -47,8 +48,10 @@
             <td class="w-25 ">{{task.date}}</td>
             <td>{{task.task}}</td>
             <td>
+              {% if task.status == False %}
               <a href="{% url 'edit-task' task.id %}" class="btn btn-sm btn-primary">Edit</a>
-              <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{task.id}}" class="btn btn-sm btn-danger">Delete</button>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{task.id}}" class="btn btn-sm btn-danger">X</button>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#completeModal{{task.id}}" class="btn btn-sm btn-success">✓</button>
               <div class="modal fade text-dark" id="deleteModal{{task.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -66,6 +69,27 @@
                   </div>
                 </div>
             </div>
+
+              <div class="modal fade text-dark" id="completeModal{{task.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Complete Task</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure that you want to mark this task as Completed?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <a href="{% url 'complete-task' task.id %}" class="btn btn-danger">Yes</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-success">Completed ✓</p>
+            {% endif %}
             </td>
           </tr>
           {% endfor %}

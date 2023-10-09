@@ -99,3 +99,14 @@ def DeleteTask(request, id):
         return redirect('main')
     except:
         return redirect('main')
+    
+@never_cache
+@login_required(login_url="user-login")
+def TaskComplete(request, id):
+    try:
+        task = Tasks.objects.get(id=id)
+        task.status = True
+        task.save()
+        return redirect('main')
+    except:
+        return redirect('main')

@@ -4,7 +4,7 @@ To get started you can simply clone this project repository and install the depe
 Clone the Sai_Info repository using git:
 ```python
 git clone https://github.com/AmanRahees/Sai_Info.git
-cd Expose
+cd Sai_Info
 ```
 
 Create a virtual environment to install dependencies in and activate it:
